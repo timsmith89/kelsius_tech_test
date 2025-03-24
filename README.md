@@ -66,5 +66,7 @@ Installation methods will depend on your operating system.
     After making this change, run the following commands:
 
     docker compose down -v
+
     docker compose build
+    
     docker compose up -d
