@@ -14,6 +14,8 @@ services:
       MYSQL_DATABASE: kelsius_tech_test
       MYSQL_USER: root
       MYSQL_PASSWORD: root
+    command: >
+      sh -c "/usr/local/bin/wait-for-it mysql:3306 --timeout=30 -- php /var/www/html/docker/populate_db.php 2 && apache2-foreground"
     depends_on:
       - mysql
 

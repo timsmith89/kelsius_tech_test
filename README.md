@@ -49,6 +49,22 @@ Installation methods will depend on your operating system.
 
     http://localhost:8081
 
-    User Name: root
-    
-    Password: root
+    User Name: root  -   Password: root
+
+    The database should have been populated with some fake data (including users, posts & comments).
+
+6. **Changing Number of Fake Users Created**
+
+    Open docker-compose.yml and look for this line:
+
+    sh -c "/usr/local/bin/wait-for-it mysql:3306 --timeout=30 -- php /var/www/html/docker/populate_db.php && apache2-foreground"
+
+    To change the number of fake users generated, simply add a number after populate_db.php:
+
+    Example: sh -c "/usr/local/bin/wait-for-it mysql:3306 --timeout=30 -- php /var/www/html/docker/populate_db.php 5 && apache2-foreground"
+
+    After making this change, run the following commands:
+
+    docker compose down -v
+    docker compose build
+    docker compose up -d
