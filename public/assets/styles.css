@@ -1,0 +1,197 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Main Layout */
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    /* Header, Main, Footer */
+    min-height: 100vh;
+    justify-content: center;
+}
+
+/* Header & Footer */
+.header,
+.footer {
+    width: 100vw;
+    background: #b3cdb6;
+    color: #000000;
+    text-align: center;
+}
+
+/* Sidebar */
+.sidebar {
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+/* Main Content */
+.main {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+/* Active link */
+.active {
+    color: gray;
+    pointer-events: none;
+    /* Makes the link unclickable */
+    text-decoration: none;
+    cursor: default;
+}
+
+/* Form Container */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.form-container hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Form */
+form {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #0f0f91;
+    outline: none;
+}
+
+.form-title {
+    margin-bottom: 10px;
+}
+
+form p {
+    padding: 15px 0;
+    /* Add vertical padding for better spacing */
+    line-height: 1.6;
+    /* Improve readability */
+}
+
+/* Text Center */
+.text-center {
+    text-align: center;
+}
+
+button {
+    display: inline-block !important;
+    margin-top: 15px !important;
+    padding: 10px 20px !important;
+    background: #cfddd0 !important;
+    color: rgb(0, 0, 0) !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+button a {
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none;
+}
+
+button:hover {
+    background: #b3cdb6;
+}
+
+/* Navigation Styles */
+nav {
+    background: #cfddd0;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background: #b3cdb6;
+    color: #000000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-rows: auto 1fr auto;
+    }
+
+    .main {
+        padding: 20px;
+        width: 95%;
+    }
+
+    form {
+        max-width: 90%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
