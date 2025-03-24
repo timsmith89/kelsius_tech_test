@@ -2,13 +2,14 @@
 
 require_once '../db/connect.php';
 require_once '../classes/user.php';
-include 'components/header.php';
 
 $user = new User($pdo);
 
 if ($user->isLoggedIn()) {
     header("Location: profile.php");
 }
+
+include 'components/header.php';
 ?>
 
 <div class="text-center">
