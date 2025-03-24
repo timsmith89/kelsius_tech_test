@@ -1,0 +1,16 @@
+{
+    "name": "timsmith/kelsius_tech_test",
+    "require": {
+        "fakerphp/faker": "^1.24"
+    },
+    "autoload": {
+        "psr-4": {
+            "Timsmith\\KelsiusTechTest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tim Smith"
+        }
+    ]
+}

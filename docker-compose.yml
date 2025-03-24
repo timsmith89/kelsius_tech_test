@@ -1,0 +1,45 @@
+services:
+  php:
+    image: php:8.4-apache
+    build:
+      context: ./docker
+    container_name: php_app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: kelsius_tech_test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kelsius_tech_test
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
