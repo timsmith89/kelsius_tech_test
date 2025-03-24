@@ -18,7 +18,7 @@ Installation methods will depend on your operating system.
    Start by cloning this repository to your local machine:
 
    git clone https://github.com/timsmith89/kelsius_tech_test.git
-   
+
    cd kelsius_tech_test
 
 2. **Build the Docker Image**
@@ -48,5 +48,7 @@ Installation methods will depend on your operating system.
     The Docker container includes phpmyadmin which will allow you to view any data stored in the database
 
     http://localhost:8081
+
     User Name: root
+    
     Password: root
