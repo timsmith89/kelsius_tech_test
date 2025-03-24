@@ -2,7 +2,7 @@
 
 require_once '../db/connect.php';
 require_once '../classes/user.php';
-include 'header.php';
+include 'components/header.php';
 
 $user = new User($pdo);
 
@@ -16,4 +16,4 @@ if ($user->isLoggedIn()) {
     <p><a href="login.php">Login</a> or <a href="register.php">Register</a> to get started.</p>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'components/footer.php'; ?>

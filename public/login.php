@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include 'header.php';
+include 'components/header.php';
 ?>
 
 <script src="/assets/user_forms.js"></script>
@@ -43,4 +43,4 @@ include 'header.php';
     </form>
 </div>
 
-<?php include 'footer.php';
+<?php include 'components/footer.php';
