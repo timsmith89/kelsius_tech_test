@@ -6,6 +6,7 @@ services:
     container_name: php_app
     volumes:
       - .:/var/www/html
+      - ./sessions:/var/lib/php/sessions
     ports:
       - "8080:80"
     environment:

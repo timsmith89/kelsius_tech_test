@@ -63,7 +63,6 @@ class User
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password_hash'])) {
-            session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
@@ -106,7 +105,6 @@ class User
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)");
 
         if ($stmt->execute([$name, $email, $passwordHash])) {
-            $this->audit->logAuditTrail("Account registered at " . date('h:iA'));
             return true;
         }
 

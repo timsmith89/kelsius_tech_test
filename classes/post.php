@@ -26,7 +26,7 @@ class Post
             return false;
         }
 
-        $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, created_at) VALUES (?, ?, ?, NOW())");
+        $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)");
 
         if ($stmt->execute([$_SESSION['user_id'], $title, $content])) {
             $this->audit->logAuditTrail("Created a post at " . date('h:iA'));
@@ -44,11 +44,11 @@ class Post
     public function getAllPosts(): array
     {
         $stmt = $this->pdo->prepare("
-            SELECT posts.id, posts.user_id, posts.title, posts.content, posts.created_at, users.name AS author
+            SELECT posts.id, posts.user_id, posts.title, posts.content, users.name AS author
             FROM posts 
             JOIN users ON posts.user_id = users.id
             WHERE users.id = ?
-            ORDER BY posts.created_at DESC
+            ORDER BY posts.id DESC
         ");
 
         $stmt->execute([$_SESSION["user_id"]]);
@@ -64,7 +64,7 @@ class Post
     public function getPostById(int $postId): ?array
     {
         $stmt = $this->pdo->prepare("
-            SELECT posts.id, posts.user_id, posts.title, posts.content, posts.created_at, users.name AS author
+            SELECT posts.id, posts.user_id, posts.title, posts.content, users.name AS author
             FROM posts
             JOIN users ON posts.user_id = users.id
             WHERE posts.id = ? AND posts.user_id = ?
@@ -94,7 +94,7 @@ class Post
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($post && $post['user_id'] === $_SESSION['user_id']) {
-            $stmt = $this->pdo->prepare("UPDATE posts SET title = ?, content = ?, created_at = NOW() WHERE id = ?");
+            $stmt = $this->pdo->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ?");
 
             if ($stmt->execute([$title, $content, $postId])) {
                 $this->audit->logAuditTrail("Updated a post at " . date('h:iA'));
@@ -115,7 +115,7 @@ class Post
     {
         $stmt = $this->pdo->prepare("DELETE FROM posts WHERE id = ? AND user_id = ?");
 
-        if ($stmt->execute([$postId, $_SESSION["userId"]])) {
+        if ($stmt->execute([$postId, $_SESSION["user_id"]])) {
             $this->audit->logAuditTrail("Deleted a post at " . date('h:iA'));
             return true;
         }

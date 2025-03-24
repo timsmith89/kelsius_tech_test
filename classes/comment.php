@@ -58,12 +58,12 @@ class Comment
         }
 
         $stmt = $this->pdo->prepare("
-            SELECT comments.id, comments.user_id, comments.content, comments.created_at, users.name AS author
+            SELECT comments.id, comments.user_id, comments.content, users.name AS author
             FROM comments 
             JOIN users ON comments.user_id = users.id
             WHERE comments.post_id = ?
             AND comments.user_id = ?
-            ORDER BY comments.created_at ASC
+            ORDER BY id DESC
         ");
 
         $stmt->execute([$postId, $_SESSION['user_id']]);
