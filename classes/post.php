@@ -29,7 +29,7 @@ class Post
         $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, created_at) VALUES (?, ?, ?, NOW())");
 
         if ($stmt->execute([$_SESSION['user_id'], $title, $content])) {
-            $this->audit->logAuditTrail($_SESSION['user_id'], "Created a post at " . date('h:iA'));
+            $this->audit->logAuditTrail("Created a post at " . date('h:iA'));
             return true;
         }
 
@@ -39,10 +39,9 @@ class Post
     /**
      * Get all posts by user ID.
      * 
-     * @param int $userId
      * @return array
      */
-    public function getAllPostsByUserId(int $userId): array
+    public function getAllPosts(): array
     {
         $stmt = $this->pdo->prepare("
             SELECT posts.id, posts.user_id, posts.title, posts.content, posts.created_at, users.name AS author
@@ -52,7 +51,7 @@ class Post
             ORDER BY posts.created_at DESC
         ");
 
-        $stmt->execute([$userId]);
+        $stmt->execute([$_SESSION["user_id"]]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -60,10 +59,9 @@ class Post
      * Get a single post by ID and user ID.
      * 
      * @param int $postId
-     * @param int $userId
      * @return array|null
      */
-    public function getPostById(int $postId, int $userId): ?array
+    public function getPostById(int $postId): ?array
     {
         $stmt = $this->pdo->prepare("
             SELECT posts.id, posts.user_id, posts.title, posts.content, posts.created_at, users.name AS author
@@ -72,7 +70,7 @@ class Post
             WHERE posts.id = ? AND posts.user_id = ?
         ");
 
-        $stmt->execute([$postId, $userId]);
+        $stmt->execute([$postId, $_SESSION["user_id"]]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
@@ -99,7 +97,7 @@ class Post
             $stmt = $this->pdo->prepare("UPDATE posts SET title = ?, content = ?, created_at = NOW() WHERE id = ?");
 
             if ($stmt->execute([$title, $content, $postId])) {
-                $this->audit->logAuditTrail($_SESSION['user_id'], "Updated a post at " . date('h:iA'));
+                $this->audit->logAuditTrail("Updated a post at " . date('h:iA'));
                 return true;
             }
         }
@@ -111,15 +109,14 @@ class Post
      * Delete a post.
      * 
      * @param int $postId
-     * @param int $userId
      * @return bool
      */
-    public function deletePost(int $postId, int $userId): bool
+    public function deletePost(int $postId): bool
     {
         $stmt = $this->pdo->prepare("DELETE FROM posts WHERE id = ? AND user_id = ?");
 
-        if ($stmt->execute([$postId, $userId])) {
-            $this->audit->logAuditTrail($_SESSION['user_id'], "Deleted a post at " . date('h:iA'));
+        if ($stmt->execute([$postId, $_SESSION["userId"]])) {
+            $this->audit->logAuditTrail("Deleted a post at " . date('h:iA'));
             return true;
         }
 

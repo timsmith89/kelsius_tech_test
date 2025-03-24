@@ -67,7 +67,7 @@ class User
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
-            $this->audit->logAuditTrail($_SESSION['user_id'], "Logged in at " . date('h:iA'));
+            $this->audit->logAuditTrail("Logged in at " . date('h:iA'));
             header("Location: profile.php");
             exit;
         }
@@ -106,7 +106,7 @@ class User
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)");
 
         if ($stmt->execute([$name, $email, $passwordHash])) {
-            $this->audit->logAuditTrail($_SESSION['user_id'], "Account registered at " . date('h:iA'));
+            $this->audit->logAuditTrail("Account registered at " . date('h:iA'));
             return true;
         }
 
@@ -153,7 +153,7 @@ class User
         if ($stmt->execute([$name, $email, $userId])) {
             $_SESSION["user_name"] = $name;
             $_SESSION["user_email"] = $email;
-            $this->audit->logAuditTrail($_SESSION['user_id'], "Profile updated at " . date('h:iA'));
+            $this->audit->logAuditTrail("Profile updated at " . date('h:iA'));
             return true;
         }
 
