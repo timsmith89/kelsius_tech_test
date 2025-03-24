@@ -80,13 +80,4 @@ foreach ($posts as $postId) {
     }
 }
 
-// Insert audit logs
-foreach ($users as $userId) {
-    for ($l = 0; $l < rand(1, 3); $l++) {  // 1-3 audit log entries per user
-        $action = $faker->randomElement(["Updated profile", "Deleted record", "Created post", "Added comment"]);
-        $stmt = $pdo->prepare("INSERT INTO audit_log (user_id, action) VALUES (?, ?)");
-        $stmt->execute([$userId, $action]);
-    }
-}
-
 echo "Database populated with $recordCount users, posts, comments, and audit logs.\n";
