@@ -18,6 +18,7 @@ Installation methods will depend on your operating system.
    Start by cloning this repository to your local machine:
 
    git clone https://github.com/timsmith89/kelsius_tech_test.git
+   
    cd kelsius_tech_test
 
 2. **Build the Docker Image**
