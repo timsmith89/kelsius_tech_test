@@ -17,15 +17,18 @@ Installation methods will depend on your operating system.
 
    Start by cloning this repository to your local machine:
 
-   **git clone https://github.com/timsmith89/kelsius_tech_test.git**
-
-   **cd kelsius_tech_test**
+    ```bash
+    git clone https://github.com/timsmith89/kelsius_tech_test.git
+    cd kelsius_tech_test
+    ```
 
 2. **Build the Docker Image**
 
     Use Docker Compose to build the app's image:
 
-    **docker compose build**
+    ```bash
+    docker compose build
+    ```
 
     This will pull the necessary base images and set up the environment for the app.
 
@@ -33,13 +36,16 @@ Installation methods will depend on your operating system.
 
     After building the image, run the app using Docker Compose:
 
-    **docker compose up -d** (-d will detach Docker from the terminal)
+    ```bash
+    docker compose up -d
+    ```
+    -d will detach Docker from the terminal
 
 4. **Access the App**
 
     The app should now be running. Open your browser and navigate to the following address:
 
-    http://localhost:8080
+    **http://localhost:8080**
 
     You should be able to see the app in action.
 
@@ -55,17 +61,17 @@ Installation methods will depend on your operating system.
 
     After making this change, run the following commands:
 
-    **docker compose down -v**
-
-    **docker compose build**
-
-    **docker compose up -d**
+    ```bash
+    docker compose down -v
+    docker compose build
+    docker compose up -d
+    ```
 
 6. **View the Database**
 
     The Docker container includes phpmyadmin which will allow you to view any data stored in the database
 
-    http://localhost:8081
+    **http://localhost:8081**
 
     User Name: **root**
     Password: **root**
