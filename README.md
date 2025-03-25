@@ -41,9 +41,11 @@ Installation methods will depend on your operating system.
     ```
     -d will detach Docker from the terminal
 
+    By default, the app uses port 8080 & 8081. If either of these ports are already in use, you can change them in the docker-compose.yml file.
+
 4. **Fake Data**
 
-    When the app is initialised, a script runs which populates the tables with fake data using the Faker
+    When the app is initialised, a script runs which populates the tables with fake data using the Faker library.
 
     Open docker-compose.yml and look for this line:
 
