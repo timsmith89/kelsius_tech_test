@@ -2,7 +2,7 @@ services:
   php:
     image: php:8.4-apache
     build:
-      context: ./docker
+      context: .
     container_name: php_app
     volumes:
       - .:/var/www/html
@@ -15,7 +15,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     command: >
-      sh -c "/usr/local/bin/wait-for-it mysql:3306 --timeout=30 -- php /var/www/html/docker/populate_db.php && apache2-foreground"
+      bash -c "php /var/www/html/populate_db.php || echo 'Script failed, but container stays running'; apache2-foreground"
     depends_on:
       - mysql
 

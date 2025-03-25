@@ -23,9 +23,11 @@ RUN a2enmod rewrite
 # Copy Apache config
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
 
-# Install Composer dependencies
-COPY ./composer.json ./composer.lock /var/www/html/ 
-RUN composer install --no-scripts --no-autoloader
+# First, copy the entire project (including docker/composer.json)
+COPY . /var/www/html/
+
+# Run composer.install
+RUN cd /var/www/html && composer clear-cache && composer install --no-dev --optimize-autoloader
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
