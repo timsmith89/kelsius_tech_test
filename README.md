@@ -27,7 +27,7 @@ Installation methods will depend on your operating system.
     Use Docker Compose to build the app's image:
 
     ```bash
-    docker compose build
+    docker compose build --no-cache
     ```
 
     This will pull the necessary base images and set up the environment for the app.
@@ -69,7 +69,7 @@ Installation methods will depend on your operating system.
 
     The database should have been populated with some fake data (including users, posts & comments).
 
-    Each fake user created will have the password: **password**
+    Each fake user created will have been assigned with the password: **password**
 
 6. **Access the App**
 
