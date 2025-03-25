@@ -41,15 +41,9 @@ Installation methods will depend on your operating system.
     ```
     -d will detach Docker from the terminal
 
-4. **Access the App**
+4. **Fake Data**
 
-    The app should now be running. Open your browser and navigate to the following address:
-
-    **http://localhost:8080**
-
-    You should be able to see the app in action.
-
-5. **Changing Number of Fake Users Created**
+    When the app is initialised, a script runs which populates the tables with fake data using the Faker
 
     Open docker-compose.yml and look for this line:
 
@@ -67,7 +61,7 @@ Installation methods will depend on your operating system.
     docker compose up -d
     ```
 
-6. **View the Database**
+5. **View the Database**
 
     The Docker container includes phpmyadmin which will allow you to view any data stored in the database
 
@@ -79,3 +73,19 @@ Installation methods will depend on your operating system.
     The database should have been populated with some fake data (including users, posts & comments).
 
     Each fake user created will have the password: **password**
+
+6. **Access the App**
+
+    The app should now be running. Open your browser and navigate to the following address:
+
+    **http://localhost:8080**
+
+    You should be able to see the app in action.
+
+7. **Other points to mention**
+
+    Each of the fake users will be assigned with either the admin or user role.
+
+    Any users that you create manually on the register page can be assigned with either the admin or user role.
+
+    To demonstrate the user of user roles, users assigned with the user role will not be able to delete posts or edit/delete comments.
