@@ -56,6 +56,8 @@ Installation methods will depend on your operating system.
 
     If you don't provide a number in the command, it will default to creating 10 fake users.
 
+    After running these commands, proceed to the next step.
+
 5. **View the Database**
 
     The Docker container includes phpmyadmin which will allow you to view any data stored in the database
