@@ -58,4 +58,48 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+
+    const manageCommentForm = document.getElementById("manage-comment-form");
+
+    if (manageCommentForm) {
+        manageCommentForm.addEventListener("submit", async (event) => {
+            // Ensure only form submission triggers this logic
+            event.preventDefault();
+
+            // Get the form action and form data
+            const formData = new FormData(form);
+            const action = formData.get("action");
+
+            // Select the existing success message container
+            const successMessage = document.querySelector(".success-message");
+
+            fetch(form.action, {
+                method: "POST",
+                body: formData
+            })
+            .then(() => {
+                if (successMessage) {
+                    // Update the content of the existing success message
+                    if (action === "add") {
+                        successMessage.textContent = "Comment added successfully!";
+                    } else if (action === "edit") {
+                        successMessage.textContent = "Comments successfully updated!";
+                    } else if (action === "delete") {
+                        successMessage.textContent = "Comment successfully deleted!";
+                    }
+
+                    // Show the success message
+                    successMessage.style.display = "block";
+
+                    // Hide the message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = "none";
+                    }, 5000);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+        });
+    }
 });
