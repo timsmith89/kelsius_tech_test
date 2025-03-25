@@ -1,12 +1,15 @@
 <?php
 require_once '../db/connect.php';
-require_once '../classes/comment.php';
 require_once '../classes/post.php';
 require_once '../classes/user.php';
 
 $post = new Post($pdo);
 $user = new User($pdo);
 $user->requireLogin();
+$userId = $_SESSION['user_id'];
+
+// Check if the user is an admin
+$isAdmin = $user->getUserRole($userId) === "admin";
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,7 +61,10 @@ if ($getPost): ?>
             </div>
             <div class="button-group">
                 <button type="submit" name="action" value="edit">Save Changes</button>
-                <button type="submit" name="action" value="delete" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
+                <!-- Only show this button to admins -->
+                <?php if ($isAdmin): ?>
+                    <button type="submit" name="action" value="delete" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
+                <?php endif; ?>
             </div>
         </form>
     </div>

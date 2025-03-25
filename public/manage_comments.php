@@ -13,6 +13,9 @@ $userId = $_SESSION['user_id'];
 
 include 'components/header.php';
 
+// Check if the user is an admin
+$isAdmin = $user->getUserRole($userId) === "admin";
+
 // Validate post ID
 $postId = $_GET['id'] ?? null;
 if (!$postId || !$post->getPostById($postId)) {
@@ -73,14 +76,19 @@ $getComments = $comments->getCommentsByPostId($postId);
 
                     <div class="form-group">
                         <label>Comment:</label>
-                        <textarea name="content" required><?= htmlspecialchars($c['content']) ?></textarea>
+                        <textarea name="content" class="form-control <?= $isAdmin ? '' : 'greyed-out' ?>"
+                            <?= $isAdmin ? '' : 'readonly' ?>
+                            required><?= htmlspecialchars($c['content']) ?></textarea>
                     </div>
 
-                    <div class="button-group">
-                        <button type="submit" name="action" value="edit">Save Changes</button>
-                        <button type="submit" name="action" value="delete"
-                            onclick="return confirm('Are you sure you want to delete this comment?')">Delete Comment</button>
-                    </div>
+                    <!-- Only show these buttons to admins -->
+                    <?php if ($isAdmin): ?>
+                        <div class="button-group">
+                            <button type="submit" name="action" value="edit">Save Changes</button>
+                            <button type="submit" name="action" value="delete"
+                                onclick="return confirm('Are you sure you want to delete this comment?')">Delete Comment</button>
+                        </div>
+                    <?php endif; ?>
                     <hr>
                 <?php endforeach; ?>
             </form>
