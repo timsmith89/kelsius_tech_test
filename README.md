@@ -86,6 +86,6 @@ Installation methods will depend on your operating system.
 
     Each of the fake users will be assigned with either the admin or user role.
 
-    Any users that you create manually on the register page can be assigned with either the admin or user role.
+    Any users that you create manually on the register page can be assigned with either role.
 
     To demonstrate the user of user roles, users assigned with the user role will not be able to delete posts or edit/delete comments.
