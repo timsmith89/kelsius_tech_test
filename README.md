@@ -45,23 +45,16 @@ Installation methods will depend on your operating system.
 
 4. **Fake Data**
 
-    When the app is initialised, a script runs which populates the tables with fake data using the Faker library.
+    When the app is initialised, you will need to go into the Docker container to install composer and then run the script which uses the Faker library.
 
-    Open docker-compose.yml and look for this line:
-
-    **sh -c "/usr/local/bin/wait-for-it mysql:3306 --timeout=30 -- php /var/www/html/docker/populate_db.php && apache2-foreground"**
-
-    To change the number of fake users generated, simply add a number after populate_db.php:
-
-    Example: **sh -c "/usr/local/bin/wait-for-it mysql:3306 --timeout=30 -- php /var/www/html/docker/populate_db.php 5 && apache2-foreground"**
-
-    After making this change, run the following commands:
+    There is a command in the Dockerfile for installing Composer, but for whatever reason, it doesn't appear to be creating the vendor folder, so the alternative option is to manually run the following:
 
     ```bash
-    docker compose down -v
-    docker compose build
-    docker compose up -d
+    docker compose exec php bash
+    composer install && php populate_db.php 3
     ```
+
+    If you don't provide a number in the command, it will default to creating 10 fake users.
 
 5. **View the Database**
 
