@@ -85,4 +85,4 @@ Installation methods will depend on your operating system.
 
     Any users that you create manually on the register page can be assigned with either role.
 
-    To demonstrate the user of user roles, users assigned with the user role will not be able to delete posts or edit/delete comments.
+    To demonstrate the use of roles, users assigned with the 'user' role will not be able to delete posts or edit/delete comments.
