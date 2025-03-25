@@ -43,18 +43,7 @@ Installation methods will depend on your operating system.
 
     You should be able to see the app in action.
 
-5. **View the Database**
-
-    The Docker container includes phpmyadmin which will allow you to view any data stored in the database
-
-    http://localhost:8081
-
-    User Name: **root**
-    Password: **root**
-
-    The database should have been populated with some fake data (including users, posts & comments).
-
-6. **Changing Number of Fake Users Created**
+5. **Changing Number of Fake Users Created**
 
     Open docker-compose.yml and look for this line:
 
@@ -71,3 +60,16 @@ Installation methods will depend on your operating system.
     **docker compose build**
 
     **docker compose up -d**
+
+6. **View the Database**
+
+    The Docker container includes phpmyadmin which will allow you to view any data stored in the database
+
+    http://localhost:8081
+
+    User Name: **root**
+    Password: **root**
+
+    The database should have been populated with some fake data (including users, posts & comments).
+
+    Each fake user created will have the password: **password**
