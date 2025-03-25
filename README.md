@@ -39,7 +39,7 @@ Installation methods will depend on your operating system.
     ```bash
     docker compose up -d
     ```
-    -d will detach Docker from the terminal
+    -d will detach Docker from the terminal. Remove the -d from the commnd if you need to debug the application.
 
     By default, the app uses port 8080 & 8081. If either of these ports are already in use, you can change them in the docker-compose.yml file.
 
