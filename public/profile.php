@@ -60,6 +60,10 @@ include 'components/header.php';
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="<?= htmlspecialchars($_SESSION['user_email']) ?>" required>
         </div>
+        <div class="form-group">
+            <label for="user-role">User Role:</label>
+            <input type="text" id="user-role" class="greyed-out" value="<?= $_SESSION["user_role"] ?? 'Unknown' ?>" readonly>
+        </div>
         <button type="submit">Update Profile</button>
     </form>
 </div>

@@ -1,4 +1,6 @@
-/* General Styles */
+/* ========================
+   General Styles
+======================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,7 +15,9 @@ body {
     min-height: 100vh;
 }
 
-/* Main Layout */
+/* ========================
+   Layout Styles
+======================== */
 .container {
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -22,22 +26,19 @@ body {
     justify-content: center;
 }
 
-/* Header & Footer */
 .header,
 .footer {
     width: 100vw;
     background: #b3cdb6;
-    color: #000000;
+    color: #000;
     text-align: center;
 }
 
-/* Sidebar */
 .sidebar {
     background: #f4f4f4;
     padding: 20px;
 }
 
-/* Main Content */
 .main {
     background: white;
     padding: 30px;
@@ -48,16 +49,9 @@ body {
     margin: 20px auto;
 }
 
-/* Active link */
-.active {
-    color: gray;
-    pointer-events: none;
-    /* Makes the link unclickable */
-    text-decoration: none;
-    cursor: default;
-}
-
-/* Form Container */
+/* ========================
+   Form Styles
+======================== */
 .form-container {
     display: flex;
     justify-content: center;
@@ -68,11 +62,9 @@ body {
 }
 
 .form-container hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
-/* Form */
 form {
     background: white;
     padding: 25px;
@@ -83,11 +75,14 @@ form {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Form Group */
+.form-title {
+    margin-bottom: 10px;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
-    padding-bottom: 2px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
@@ -96,58 +91,85 @@ form {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.styled-dropdown {
     width: 100%;
     padding: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     transition: border 0.3s;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.styled-dropdown:focus {
     border-color: #0f0f91;
     outline: none;
 }
 
-.form-title {
-    margin-bottom: 10px;
+/* ========================
+   Dropdown Styling
+======================== */
+.styled-dropdown {
+    color: #333;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-form p {
-    padding: 15px 0;
-    /* Add vertical padding for better spacing */
-    line-height: 1.6;
-    /* Improve readability */
+.styled-dropdown:hover {
+    border-color: #007BFF;
 }
 
-/* Text Center */
-.text-center {
-    text-align: center;
+.styled-dropdown:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
 }
 
+/* ========================
+   Buttons
+======================== */
 button {
     display: inline-block !important;
     margin-top: 15px !important;
     padding: 10px 20px !important;
     background: #cfddd0 !important;
-    color: rgb(0, 0, 0) !important;
+    color: #000 !important;
     border: none !important;
     border-radius: 5px !important;
     cursor: pointer !important;
     text-decoration: none !important;
 }
 
+button:hover {
+    background: #b3cdb6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 button a {
-    color: rgb(0, 0, 0) !important;
+    color: #000 !important;
     text-decoration: none;
 }
 
-button:hover {
-    background: #b3cdb6;
+/* ========================
+   Disabled and Greyed-out Styles
+======================== */
+.greyed-out {
+    background-color: #f0f0f0;
+    /* Light grey background */
+    color: #555;
+    /* Dark grey text */
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
 }
 
-/* Navigation Styles */
+/* ========================
+   Navigation Styles
+======================== */
 nav {
     background: #cfddd0;
     padding: 15px 20px;
@@ -164,18 +186,37 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     font-weight: bold;
-    color: #000000;
+    color: #000;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background 0.3s, color 0.3s;
 }
 
 nav ul li a:hover {
     background: #b3cdb6;
-    color: #000000;
+    color: #000;
 }
 
-/* Responsive Design */
+/* ========================
+   Active Link
+======================== */
+.active {
+    color: gray;
+    pointer-events: none;
+    /* Makes the link unclickable */
+    text-decoration: none;
+    cursor: default;
+}
+
+/* ========================
+   Text Alignment
+======================== */
+.text-center {
+    text-align: center;
+}
+
+/* ========================
+   Responsive Design
+======================== */
 @media (max-width: 768px) {
     .container {
         grid-template-rows: auto 1fr auto;

@@ -6,8 +6,19 @@ $faker = Faker\Factory::create();
 
 $recordCount = isset($argv[1]) ? (int)$argv[1] : 10;  // Default to 10 records if no parameter is provided
 
-// Insert users
+// Fetch available roles
+$stmt = $pdo->query("SELECT id FROM roles");
+$roleIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+if (empty($roleIds)) {
+    echo "No roles found. Make sure to run the schema with roles first.\n";
+    exit();
+}
+
+// Insert users with exactly one role
 $users = [];
+$adminAssigned = false;
+
 for ($i = 0; $i < $recordCount; $i++) {
     $name = $faker->name;
     $email = $faker->unique()->safeEmail;
@@ -16,7 +27,22 @@ for ($i = 0; $i < $recordCount; $i++) {
     $stmt = $pdo->prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)");
     $stmt->execute([$name, $email, $passwordHash]);
 
-    $users[] = $pdo->lastInsertId();
+    $userId = $pdo->lastInsertId();
+    $users[] = $userId;
+
+    // Assign exactly one role per user
+    if (!$adminAssigned) {
+        // Assign the first user as admin
+        $roleId = 1;  // Assuming role ID 1 is 'admin'
+        $adminAssigned = true;
+    } else {
+        // Assign a random role to other users
+        $roleId = $roleIds[array_rand($roleIds)];
+    }
+
+    // Insert into user_roles
+    $stmt = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
+    $stmt->execute([$userId, $roleId]);
 }
 
 // Insert posts

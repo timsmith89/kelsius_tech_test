@@ -66,6 +66,7 @@ class User
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_role'] = $this->getUserRole($user['id']);
             $this->audit->logAuditTrail("Logged in at " . date('h:iA'));
             header("Location: profile.php");
             exit;
@@ -94,7 +95,7 @@ class User
      * @param string $password
      * @return bool
      */
-    public function register(string $name, string $email, string $password): bool
+    public function register(string $name, string $email, string $password, string $role): bool
     {
         if ($this->emailExists($email)) {
             return false;  // Email already exists
@@ -105,7 +106,15 @@ class User
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)");
 
         if ($stmt->execute([$name, $email, $passwordHash])) {
-            return true;
+            $userId = $this->pdo->lastInsertId();
+
+            // Assign the user role to the new user
+            $roleStmt = $this->pdo->prepare("
+                INSERT INTO user_roles (user_id, role_id)
+                VALUES (?, (SELECT id FROM roles WHERE name = ? LIMIT 1))
+            ");
+
+            return $roleStmt->execute([$userId, $role]);
         }
 
         return false;
@@ -156,5 +165,23 @@ class User
         }
 
         return false;
+    }
+
+    /**
+     * Get user role.
+     * 
+     * @param int $userId
+     * @return string
+     */
+    public function getUserRole(int $userId): string
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT r.name 
+            FROM roles r
+            JOIN user_roles ur ON r.id = ur.role_id
+            WHERE ur.user_id = ?
+        ");
+        $stmt->execute([$userId]);
+        return $stmt->fetchColumn();
     }
 }

@@ -17,7 +17,7 @@ class Audit
      */
     public function getAuditTrail(): array
     {
-        $stmt = $this->pdo->prepare("SELECT action FROM audit_log WHERE user_id = ?");
+        $stmt = $this->pdo->prepare("SELECT action FROM audit_log WHERE user_id = ? ORDER BY id DESC");
         $stmt->execute([$_SESSION['user_id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
