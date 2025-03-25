@@ -38,9 +38,9 @@ include 'components/header.php';
         </div>
         <button type="submit">Login</button>
         <button type="button" id="togglePassword">Show Password</button>
-        <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
         <br><br>
         <p>Don't have an account? <a href="register.php">Register here</a></p>
+        <?php if (!empty($error)) echo "<br><p style='color:red;'>$error</p>"; ?>
     </form>
 </div>
 

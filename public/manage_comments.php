@@ -55,7 +55,7 @@ $getComments = $comments->getCommentsByPostId($postId);
         <p style="color: green;"><?= htmlspecialchars($success) ?></p>
     <?php endif; ?>
 
-    <form method="POST" class="comment-form">
+    <form method="POST" id="comment-form">
         <h2>Manage Comments</h2>
         <hr>
         <input type="hidden" name="action" value="add">

@@ -51,7 +51,6 @@ include 'components/header.php';
             <h2>Manage Profile</h2>
         </div>
         <hr>
-
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<?= htmlspecialchars($_SESSION['user_name']) ?>" required>

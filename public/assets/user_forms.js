@@ -34,17 +34,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (data.redirect) {
                     const messageContainer = document.createElement("p");
-                    messageContainer.textContent = "Profile updated successfully.";
+                    messageContainer.innerHTML = "<br>Profile updated successfully.";
                     messageContainer.style.color = "green";
                     profileForm.appendChild(messageContainer);
 
                     // Remove existing messages
                     const existingMessage = document.querySelector(".form-container p");
+
                     if (existingMessage) {
                         existingMessage.remove();
                     }
 
-                    // ➕ Append message and reload after 3 seconds
+                    // Append message and reload after 3 seconds
                     profileForm.appendChild(messageContainer);
 
                     setTimeout(() => {

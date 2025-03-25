@@ -48,13 +48,13 @@ include 'components/header.php';
             </select>
         </div>
         <button type="submit">Register</button>
-        <?php if (!empty($error) || !empty($success)): ?>
-            <p style="color: <?= !empty($error) ? 'red' : 'green'; ?>;">
-                <?= !empty($error) ? $error : $success; ?>
-            </p>
-        <?php endif; ?>
         <br><br>
         <p>Already have an account? <a href="login.php">Login here</a></p>
+        <?php if (!empty($error) || !empty($success)): ?>
+            <p style="color: <?= !empty($error) ? 'red' : 'green'; ?>;">
+                <br><?= !empty($error) ? $error : $success; ?>
+            </p>
+        <?php endif; ?>
     </form>
 </div>
 
